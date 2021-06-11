@@ -1,0 +1,101 @@
+{% extends 'layout.html'%}
+{% load static %}
+{% block title %}{{article.title}}{% endblock %} 
+
+{% block content %}
+<div class='article-detail'>
+    <div class="article">
+      {% if article.thumb%}
+        <img src="{{article.thumb.url}}">  
+      {% endif%}
+
+        <h2>{{article.title}}</h2>
+        <p>{{article.year}}</p>
+        <p>{{article.body|safe}}</p>
+
+        {% if user.is_authenticated %}
+            {% if user.id == article.author.id %}
+             <p><a href="{% url 'articles:edit' article.pk %}">Edit</a><p>
+             <p><a href="{% url 'articles:delete' article.pk %}">Delete</a><p>
+             {% endif %}
+        {% endif %}
+
+        <p><a href="{% url 'articles:list'%}" class="btn btn-secondary">Back</a></p>
+
+        <form action="{% url 'articles:like_article' article.pk %}" method = "POST">
+            {% csrf_token %}
+
+        {% if user.is_authenticated %}        
+            {% if liked %}
+            <button type="submit", name="article_id", value="{{ article.id }}", class="btn btn-danger btn-sm">Unlike</button> 
+
+            {% else %}
+            <button type="submit", name="article_id", value="{{ article.id }}", class="btn btn-primary btn-sm">Like</button> 
+
+            {% endif %}
+        {% else %}
+            <small><a href="{% url 'login'%}">Login</a> to like</a></small>
+        {% endif %}
+            - {{total_likes}} Likes
+        </form>
+        <hr>
+    </div>
+</div>
+<div class="card mb-3">
+  <div class="row g-0">
+    <div class="col-md-2">
+    {% if article.author.profile_pic.url %}
+        <img src="{{ article.author.profile_pic.url }}" class="card-img">
+    {% else %}
+        <img src="{% static 'img/default.png'%}" class="card-img"> 
+    {% endif %}
+    </div>
+        <div class="col-md-10">
+            <div class="card-body">
+                <h5 class="card-title">
+                    {{article.author}}</h5>
+                <p class="small text-muted">
+
+                    <a href="{% url 'accounts:show_profile_page' article.author.profile.id %}">Profile Page</a> |
+
+                    {% if article.author.profile.website_url %}
+                        <a href="{{article.author.profile.website_url}}"> Website </a> |
+                    {% endif %}
+                    {% if article.author.profile.facebook_url %}
+                        <a href="{{article.author.profile.facebook_url}}"> Facebook </a> | 
+                    {% endif %}
+                    {% if article.author.profile.twitter_url %}
+                        <a href="{{article.author.profile.twitter_url}}"> Twitter </a> |
+                    {% endif %}
+                    {% if article.author.profile.instagram_url %}
+                        <a href="{{article.author.profile.instagram_url}}"> Instagram </a> |
+                    {% endif %}
+                </p>
+                <p class="card-text">{{article.author.profile.bio}}</p>
+                
+            </div>
+        </div>
+  </div>
+  
+</div>
+<hr>
+<h3> Comments ... </h3>
+        
+        {% if not article.comments.all %}
+            No Comments Yet ... <a href="{% url 'articles:add_comment' article.pk %}">Add One</a>
+            <br/>
+            <hr>
+        {% else %}
+            <a href="{% url 'articles:add_comment' article.pk %}">Add New Comment</a>
+            <br/>
+            {% for comment in article.comments.all %}
+                <strong>{{ comment.name }} - 
+                {{ comment.date_added }}</strong>
+                <br/>
+                {{ comment.body }}
+                <br/>
+                <hr>
+            {% endfor %}    
+        {% endif %}
+
+{% endblock %}  

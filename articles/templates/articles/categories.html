@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+{% if category_articles%}
+
+    <h1>{{cats}}</h1>  
+        {%for article in category_articles %} 
+            <div class="category_articles">
+                        <a href="{% url 'articles:category' article.category %}">{{article.category}}</a>
+                        <strong><h2>{{article.title}}</h2></strong>
+                        <p>{{article.year}}</p>
+                        <p>{{article.body|slice:"50"|safe}}</p>
+                        <p>{{article.date}}</p>
+                        <p class="author">Added by: {{article.author.username}}</p>
+
+                        {% if user.is_authenticated %}
+                        <p><a href="{% url 'articles:edit' article.pk %}">Edit</a><p>
+                        <p><a href="{% url 'articles:delete' article.pk %}">Delete</a><p>
+                        {% endif %}  
+            </div>  
+        {% endfor %}     
+     
+{% else %}
+
+<h2>Sorry, this page does not exist!</h2>
+
+{% endif%}
+    
+{% endblock %}

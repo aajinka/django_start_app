@@ -1,0 +1,152 @@
+body{
+    background-color: #0f121f;
+    background-image: url(/static/img/prvni.jpeg);
+    background-repeat:no-repeat;
+    background-size: 100%;
+    color: #fff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1, h2, h3, h4, h5{
+    font-weight: normal;
+}
+
+a, a:hover, a:visited{
+    color: #00dba0;
+    text-decoration: line;
+}
+
+.wrapper{
+    max-width: 960px;
+    margin: 0 auto;
+
+}
+
+div.wrapper h2{
+    text-align: center;
+    margin: 20px auto 20px;
+    font-size: 2em;
+}
+
+
+header{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 20px 0;
+
+}
+
+nav{
+    justify-self: end;
+
+}
+
+nav li{
+    display: inline-block;
+    margin-left: 20px;
+}
+
+nav button{
+    background: none;
+    color: cornsilk;
+    cursor: pointer;
+    border: 0;
+    font-size: 1em;
+} 
+
+.articles{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 30px;
+}
+
+.article{
+    padding: 10px;
+    border: 1px solid #00dba0;
+    position: relative;
+    padding-bottom: 40px;
+}
+
+.article h2{
+    font-size: 1.2em;
+
+}
+
+.article .author{
+    padding: 10px;
+    background-color: #00dba0;
+    position: absolute;
+    right:0;
+    bottom:0;
+    margin:0;
+    color:#0f121f;
+}
+
+.article-detail .article{
+    padding: 0;
+
+}
+
+.article-detail .article img{
+    max-width:100%;
+}
+
+.article-detail .article h2{
+    text-align:center;
+    margin: 20px auto;
+    font-size: 2em;
+}
+
+.article-detail .article p{
+    text-align: center;
+}
+
+.create-article div{
+    margin-left:0px;
+    border: 1px solid #00dba0; 
+    padding:20px;
+}
+
+.create-article input, .create-article textarea{
+    display:block;
+    margin: 20px 0px 10px;
+    padding: 20px;
+
+}
+
+.create-article input[type="submit"]{
+    background-color: #00dba0;
+    color:black;
+    border:0;
+    border-radius:30px;
+    font-size:1.2em;
+    margin: 10px 0;
+}
+
+a.highlight{
+    border: 2px solid #00dba0;
+    padding: 10px;
+    border-radius: 30px;
+    color: #00dba0;
+}
+
+.helptext, .helptext ul{
+    margin: 0 auto 20px;
+    color: #fff;
+    font-size: 1em;
+    display: block;
+}
+
+.errorlist li{
+    padding: 10px;
+    list-style-type:none;
+    border: 1px solid red;
+    color: red;
+    margin: 10px 0;
+    
+ }
+
+.errorlist{
+    padding: 0;
+}
+

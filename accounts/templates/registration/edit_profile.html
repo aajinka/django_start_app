@@ -1,0 +1,13 @@
+{% extends 'layout.html'%}
+{% block title %}Edit Profile{% endblock %} 
+
+{% block content %}
+    <h1>Edit Settings</h1>
+    {{user.profile.bio}}
+    <br/><br/>
+    <form class="site-form" action="{% url 'accounts:signup'%}" method='post'>
+        {% csrf_token %}
+        {{form.as_p}}
+        <button class="btn btn-secondary">Update Profile</button>
+    </form>
+{% endblock %}

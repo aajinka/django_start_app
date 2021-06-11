@@ -1,0 +1,18 @@
+{% extends 'layout.html'%}
+
+{% block content %}
+{% if user.is_authenticated %}
+    {% if user.id == article.author.id %}
+        <h3> Delete: {{article.title}}</h3>
+            <div class='delete-article'>
+                <div><form class="site-form" action="{% url 'articles:delete' article.pk %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <p>You really want to DELETE it?!</p>
+                    <button class="btn btn-secondary">Delete</button>
+                </form></div>    
+            </div>
+    {% else %}
+    You are not allowed to delete article!
+    {% endif %}
+{% endif %}
+{% endblock%}

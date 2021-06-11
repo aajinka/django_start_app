@@ -1,0 +1,31 @@
+{% extends 'layout.html'%}
+{% block title %}{{article.title}}{% endblock %} 
+
+{% block content %}
+    <div class='create-article'>
+        <h2>Add New Awesome Innovation</h2>
+        {% if user.is_authenticated %}
+            
+                <div><form class="site-form" action="{% url 'articles:create' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{form.media}}
+                    {{form.as_p}}
+                    <button class="btn btn-secondary">Create</button>
+           
+                </form></div>
+
+        <script>
+            var name = "{{ user.id }}";
+            document.getElementById("inovation").value = name;
+        </script>
+
+        {% else %}
+
+        You are not allowed here!  
+
+        {%endif%}
+       
+    </div>
+{% endblock%}
+
+ <---!<div class="mb-3">>

@@ -1,0 +1,15 @@
+{% extends 'layout.html'%}
+{% block title %}Add Comment{% endblock %} 
+
+{% block content %}
+    
+        <h2>Add Comment</h2>       
+                <div><form class="site-form" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{form.as_p}}
+                    <button class="btn btn-secondary">Add Comment</button>
+                </form>
+                </div>
+    
+{% endblock%}
+

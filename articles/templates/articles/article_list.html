@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+  <h1>The Best Innovation From The Middle East/Izrael</h1>
+  <div class="articles">
+      {% for article in article_list %}
+        <div class="article">
+            <h2><a href="{% url 'articles:detail' article.pk %}">{{article.title}}</a></h2>
+            <a href="{% url 'articles:category' article.category|slugify %}">{{article.category}}</a>
+            <br><br/>
+            <h4>{{article.year}}</h4>
+            <p>{{article.body|slice:"50"|safe}}</p>
+            <p>{{article.date}}</p>
+            <p class="author">Added by: {{article.author.username}}</p>
+
+            {% if user.is_authenticated %}
+              {% if user.id == article.author.id %}
+              <p><a href="{% url 'articles:edit' article.pk %}">Edit</a><p>
+              <p><a href="{% url 'articles:delete' article.pk %}">Delete</a><p>
+              {% endif %}
+            {% endif %}  
+        </div>    
+      {% endfor %}
+  </div>
+{% endblock %}

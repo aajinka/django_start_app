@@ -1,0 +1,27 @@
+{% extends 'layout.html'%}
+{% block title %}Create A New Profile Page{% endblock %} 
+
+{% block content %}
+    <div class='create-article'>
+        <h2>Create Profile Page</h2>
+
+        {% if user.is_authenticated %}
+            
+                <div><form class="site-form" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                   
+                    {{form.as_p}}
+                    <button class="btn btn-secondary">Create Profile Page</button>
+           
+                </form></div>
+
+        {% else %}
+
+        You are not allowed here!  
+
+        {%endif%}
+       
+    </div>
+{% endblock%}
+
+ <---!<div class="mb-3">>

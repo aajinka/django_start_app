@@ -1,0 +1,28 @@
+{% extends 'layout.html'%}
+
+{% block content %}
+{% if user.is_authenticated %}
+    {% if user.id == article.author.id %}
+
+            <div class='update-article'>
+                <h2>Editing innovation ... </h2>
+                    {{ user.profile.bio }}
+                    <br></br>
+                    <div class="mb-3">
+                        <form action="{% url 'articles:edit' article.pk %}" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{form.media}}
+                            {{form.as_p}}
+                            <button class='btn btn-secondary'>Edit</button>
+                    </div>        
+               
+                        </form>          
+            </div>
+    {% else %}
+    You are not allowed here!
+    {% endif %}
+
+{% else %}
+You are not allowed here!
+{% endif %}
+{% endblock%}
